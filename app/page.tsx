@@ -1,7 +1,9 @@
+import SubtitlesSearchForm from './SubtitlesSearchForm';
+
 export default function Home() {
   return (
     <div>
-      coucou
+      <SubtitlesSearchForm />
     </div>
   );
 }
