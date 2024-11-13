@@ -1,11 +1,14 @@
+// https://www.youtube.com/watch?v=LJbUaciFdV8 cette video ne fonctionn pas, pourquoi ?
+
 const express = require('express');
 const ytdl = require('ytdl-core');
 const { parseStringPromise } = require('xml2js');
 
 const app = express();
 app.use(express.json());
+app.use(express.static('public'));
 
-app.post('/search', async (req, res) => {
+app.post('/api/search', async (req, res) => {
   try {
     const { youtubeUrl, searchText } = req.body;
 
@@ -32,7 +35,10 @@ app.post('/search', async (req, res) => {
 
     const results = searchInCaptions(parsedCaptions, searchText);
 
-    return res.json({ results });
+    const title = info.videoDetails.title;;
+    const thumbnail = info.videoDetails.thumbnails[info.videoDetails.thumbnails.length - 1].url;
+
+    return res.json({ title, thumbnail, results });
   } catch (error) {
     console.error('Error fetching captions:', error);
     return res.status(500).json({ error: 'Failed to fetch subtitles.' });
