@@ -1,3 +1,13 @@
+document.addEventListener('keydown', (event) => {
+  const activeElement = document.activeElement;
+  const isInputFocused = activeElement && (activeElement.id === 'youtube-url' || activeElement.id === 'search-text');
+
+  if (isInputFocused && event.key === 'Enter') {
+    event.preventDefault();
+    submitForm();
+  }
+});
+
 function formatTime(seconds) {
   if (seconds < 0) {
     throw new Error("Seconds cannot be negative");
@@ -33,7 +43,11 @@ async function submitForm() {
   const searchText = document.getElementById('search-text').value;
   const videoTitle = document.querySelector('.video-title');
   const resultList = document.querySelector('.search-results');
+  const loading = document.querySelector('.loading');
 
+  if (!youtubeUrl && !searchText) return;
+  resultList.innerHTML = "";
+  loading.classList.remove("hidden");
   try {
     const response = await fetch('/api/search', {
       method: 'POST',
@@ -44,8 +58,18 @@ async function submitForm() {
     });
 
     const data = await response.json();
-    videoTitle.innerText = data.title;
-    resultList.innerHTML = "";
+    loading.classList.add("hidden");
+    if (!data.results || !data.results.length) {
+      const li = document.createElement('li');
+      li.classList.add('bg-white', 'rounded-lg', 'shadow-md', 'p-4', 'flex', 'justify-between', 'items-center');
+      const text = document.createElement('div');
+      text.textContent = data.error ? data.error : 'No results found';
+      text.classList.add('text-gray-800');
+      li.appendChild(text);
+      resultList.appendChild(li);
+    } else {
+      videoTitle.innerText = data.title;
+    }
     data.results.forEach(result => {
       const li = document.createElement('li');
       li.classList.add('bg-white', 'rounded-lg', 'shadow-md', 'p-4', 'flex', 'justify-between', 'items-center');
@@ -58,6 +82,7 @@ async function submitForm() {
       link.href = `${youtubeUrl}&t=${parseInt(result.start)}`;
       link.target = "_blank";
       link.textContent = formatTime(parseInt(result.start));
+      link.classList.add('hover:bg-blue-100', 'transition-colors', 'p-1.5', 'rounded-lg');
       start.classList.add('text-blue-500', 'font-semibold');
       start.appendChild(link);
 
@@ -65,7 +90,6 @@ async function submitForm() {
       li.appendChild(start);
       resultList.appendChild(li);
     });
-    console.log('Server response:', data);
   } catch (error) {
     console.error('Error:', error);
   }

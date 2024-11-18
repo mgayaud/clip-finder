@@ -7,6 +7,7 @@
   <meta name="description" content="Find a YouTube clip based on the subtitles.">
   <link rel="stylesheet" href="styles.css">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="bg-gray-100 font-sans">
   <div class="min-h-screen flex flex-col items-center justify-center p-4">
@@ -14,26 +15,30 @@
       <h1 class="text-4xl font-bold text-gray-800 mb-2">Clip Finder</h1>
       <p class="video-title text-lg text-gray-600">Find key moments in your favorite YouTube videos</p>
     </header>
-    <form id="search-form" class="w-full max-w-md bg-white rounded-lg shadow-md p-6">
-      <div class="mb-4">
-        <label for="youtube-url" class="block text-sm font-medium text-gray-700 mb-1">YouTube URL</label>
+    <form id="search-form" class="w-full max-w-xl bg-white rounded-lg shadow-md p-6">
+      <div class="relative mb-4">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+          <i class="fas fa-link"></i>
+        </span>
         <input
           type="text"
           id="youtube-url"
           name="youtube-url"
           required
-          placeholder="Enter YouTube URL"
-          class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
+          placeholder="YouTube URL"
+          class="w-full pl-10 py-3 text-lg border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
       </div>
-      <div class="mb-6">
-        <label for="search-text" class="block text-sm font-medium text-gray-700 mb-1">Search Text</label>
+      <div class="relative mb-6">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+          <i class="fas fa-search"></i>
+        </span>
         <input
           type="text"
           id="search-text"
           name="search-text"
           required
-          placeholder="Enter text to search"
-          class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
+          placeholder="Search Text"
+          class="w-full pl-10 py-3 text-lg border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
       </div>
       <div>
         <button
@@ -44,6 +49,9 @@
         </button>
       </div>
     </form>
+    <div class="loading hidden mt-8">
+      <img src="images/loading.svg" alt="loading" height="50" width="50">
+    </div>
     <div class="w-full max-w-3xl mt-8">
       <ul class="search-results space-y-4">
         <!-- <li class="bg-white rounded-lg shadow-md p-4 flex justify-between items-center">
@@ -60,9 +68,6 @@
 
 <!--
 todo :
-- style hover sur les secondes
-- gestion d'erreur + pas de résultat
-- animation de chargement
-- enlever les labels + ajouter des icons dans les inputs (demander conseil à chatgpt)
+- mettre un peu en valeur les inputs par défaut (background/border)
 - icon à gauche du H1 ou remplacer le H1 par un logo
 -->

@@ -13,7 +13,7 @@ app.post('/api/search', async (req, res) => {
     const { youtubeUrl, searchText } = req.body;
 
     if (!youtubeUrl || !searchText) {
-      return res.status(400).json({ error: 'YouTube URL and search text are required!' });
+      return res.status(400).json({ error: 'YouTube URL and search text are required' });
     }
 
     const videoId = ytdl.getURLVideoID(youtubeUrl);
@@ -22,7 +22,7 @@ app.post('/api/search', async (req, res) => {
     const captions = info.player_response.captions?.playerCaptionsTracklistRenderer?.captionTracks;
 
     if (!captions || captions.length === 0) {
-      return res.status(404).json({ error: 'No captions available for this video.' });
+      return res.status(404).json({ error: 'No captions available for this video' });
     }
 
     const englishCaption = captions.find(caption => caption.languageCode === 'en') || captions[0];
@@ -41,7 +41,7 @@ app.post('/api/search', async (req, res) => {
     return res.json({ title, thumbnail, results });
   } catch (error) {
     console.error('Error fetching captions:', error);
-    return res.status(500).json({ error: 'Failed to fetch subtitles.' });
+    return res.status(500).json({ error: 'Failed to fetch subtitles' });
   }
 });
 
