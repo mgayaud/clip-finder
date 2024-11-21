@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clip Finder</title>
-  <meta name="description" content="Find a YouTube clip based on the subtitles.">
+  <link rel="icon" type="image/x-icon" href="images/clip-finder-logo.png">
+  <title>ClipFinder</title>
+  <meta name="description" content="Find key moments in your favorite YouTube videos">
   <link rel="stylesheet" href="styles.css">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -12,7 +13,10 @@
 <body class="bg-gray-100 font-sans">
   <div class="min-h-screen flex flex-col items-center justify-center p-4">
     <header class="text-center mb-8">
-      <h1 class="text-4xl font-bold text-gray-800 mb-2">Clip Finder</h1>
+      <div class="flex items-end space-x-2 mb-2 justify-center">
+        <img src="images/clip-finder-logo.png" alt="logo" height="60" width="60">
+        <h1 class="text-4xl font-bold text-gray-800">ClipFinder</h1>
+      </div>
       <p class="video-title text-lg text-gray-600">Find key moments in your favorite YouTube videos</p>
     </header>
     <form id="search-form" class="w-full max-w-xl bg-white rounded-lg shadow-md p-6">
@@ -26,7 +30,7 @@
           name="youtube-url"
           required
           placeholder="YouTube URL"
-          class="w-full pl-10 py-3 text-lg border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
+          class="w-full pl-10 py-3 text-lg border-2 border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
       </div>
       <div class="relative mb-6">
         <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
@@ -38,7 +42,7 @@
           name="search-text"
           required
           placeholder="Search Text"
-          class="w-full pl-10 py-3 text-lg border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
+          class="w-full pl-10 py-3 text-lg border-2 border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
       </div>
       <div>
         <button
